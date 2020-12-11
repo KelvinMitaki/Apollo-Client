@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import { Link } from "react-router";
 
 const SongList = ({ data }) => {
   if (!data.songs) {
@@ -15,6 +16,13 @@ const SongList = ({ data }) => {
           </li>
         ))}
       </ul>
+      <Link
+        to="/song/create"
+        style={{ position: "fixed", right: "150px" }}
+        className="btn-floating btn-large red light"
+      >
+        <i className="material-icons">add</i>
+      </Link>
     </div>
   );
 };
