@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import React from "react";
 import { graphql } from "react-apollo";
-import { Link } from "react-router";
+import { Link, hashRouter } from "react-router";
 
 class SongCreate extends React.Component {
   constructor(props) {
@@ -13,11 +13,13 @@ class SongCreate extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.mutate({
-      variables: {
-        title: this.state.title
-      }
-    });
+    this.props
+      .mutate({
+        variables: {
+          title: this.state.title
+        }
+      })
+      .then(() => hashRouter.push("/"));
     this.setState({ title: "" });
   }
   render() {
