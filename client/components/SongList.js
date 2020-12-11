@@ -7,10 +7,14 @@ const SongList = ({ data }) => {
     return <div>Loading</div>;
   }
   return (
-    <div>
-      {data.songs.map(sng => (
-        <p key={sng.id}>{sng.title}</p>
-      ))}
+    <div className="container">
+      <ul className="collection">
+        {data.songs.map(sng => (
+          <li key={sng.id} className="collection-item">
+            {sng.title}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
