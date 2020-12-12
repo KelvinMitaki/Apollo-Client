@@ -4,17 +4,35 @@ import { graphql } from "react-apollo";
 import { Link } from "react-router";
 import { fetchSongs } from "../queries/fetchSongs";
 
-const SongList = ({ data }) => {
+const SongList = ({ data, mutate }) => {
   if (!data.songs) {
     return <div>Loading</div>;
   }
+  const onSongDelete = id => {
+    mutate({
+      variables: {
+        id
+      },
+      refetchQueries: [{ query: fetchSongs }]
+    });
+  };
   return (
     <div className="container">
       <ul className="collection">
         {data.songs.map(sng => (
-          <li key={sng.id} className="collection-item">
+          <li
+            key={sng.id}
+            className="collection-item"
+            style={{ position: "relative" }}
+          >
             {sng.title}
-            <i className="material-icons">delete</i>
+            <i
+              className="material-icons"
+              style={{ position: "absolute", right: "0", cursor: "pointer" }}
+              onClick={() => onSongDelete(sng.id)}
+            >
+              delete
+            </i>
           </li>
         ))}
       </ul>
