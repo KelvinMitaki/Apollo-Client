@@ -4,7 +4,7 @@ import { graphql } from "react-apollo";
 import { Link } from "react-router";
 import { fetchSongs } from "../queries/fetchSongs";
 
-const SongList = ({ data, mutate }) => {
+const SongList = ({ data, mutate, router }) => {
   if (!data.songs) {
     return <div>Loading</div>;
   }
@@ -22,7 +22,8 @@ const SongList = ({ data, mutate }) => {
           <li
             key={sng.id}
             className="collection-item"
-            style={{ position: "relative" }}
+            style={{ position: "relative", cursor: "pointer" }}
+            onClick={() => router.push(`/song/${sng.id}`)}
           >
             {sng.title}
             <i
