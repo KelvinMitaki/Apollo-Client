@@ -14,12 +14,13 @@ const SongList = ({ data }) => {
         {data.songs.map(sng => (
           <li key={sng.id} className="collection-item">
             {sng.title}
+            <i className="material-icons">delete</i>
           </li>
         ))}
       </ul>
       <Link
         to="/song/create"
-        style={{ position: "fixed", right: "150px" }}
+        style={{ position: "fixed", right: "50px", bottom: "50px" }}
         className="btn-floating btn-large red light"
       >
         <i className="material-icons">add</i>
@@ -28,4 +29,13 @@ const SongList = ({ data }) => {
   );
 };
 
-export default graphql(fetchSongs)(SongList);
+const mutation = gql`
+  mutation DeleteSong($id: ID) {
+    deleteSong(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
+export default graphql(mutation)(graphql(fetchSongs)(SongList));
