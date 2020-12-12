@@ -12,9 +12,8 @@ const SongList = ({ data, mutate }) => {
     mutate({
       variables: {
         id
-      },
-      refetchQueries: [{ query: fetchSongs }]
-    });
+      }
+    }).then(() => data.refetch());
   };
   return (
     <div className="container">
