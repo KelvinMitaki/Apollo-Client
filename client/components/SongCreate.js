@@ -19,7 +19,7 @@ class SongCreate extends React.Component {
           title: this.state.title
         }
       })
-      .then(() => hashRouter.push("/"));
+      .then(() => this.props.router.push("/"));
     this.setState({ title: "" });
   }
   render() {
