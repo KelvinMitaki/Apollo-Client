@@ -9,10 +9,18 @@ const SongDetail = ({ data, mutate }) => {
   if (!data.song) {
     return <div>Loading...</div>;
   }
-  const likeLyric = id => {
+  const likeLyric = (id, likes) => {
     mutate({
       variables: {
         id
+      },
+      optimisticResponse: {
+        __typename: "Mutation",
+        likeLyric: {
+          __typename: "LyricType",
+          id,
+          likes: likes + 1
+        }
       }
     });
   };
@@ -40,7 +48,7 @@ const SongDetail = ({ data, mutate }) => {
                   cursor: "pointer",
                   color: lrc.likes !== 0 ? "blue" : "black"
                 }}
-                onClick={() => likeLyric(lrc.id)}
+                onClick={() => likeLyric(lrc.id, lrc.likes)}
               >
                 thumb_up
               </i>
