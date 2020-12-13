@@ -12,6 +12,9 @@ const SongDetail = ({ data }) => {
     <div className="container">
       <Link to="/">Back</Link>
       <h3>{data.song.title}</h3>
+      {data.song.lyrics.map(lrc => (
+        <p key={lrc.id}>{lrc.content}</p>
+      ))}
       <LyricCreate />
     </div>
   );

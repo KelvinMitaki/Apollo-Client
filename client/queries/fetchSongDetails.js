@@ -5,6 +5,10 @@ export const fetchSongDetails = gql`
     song(id: $id) {
       id
       title
+      lyrics {
+        id
+        content
+      }
     }
   }
 `;
