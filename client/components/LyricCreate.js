@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { withRouter } from "react-router";
+import { fetchSongDetails } from "../queries/fetchSongDetails";
 
 export class LyricCreate extends Component {
   constructor(props) {
@@ -13,19 +14,21 @@ export class LyricCreate extends Component {
   }
   submitLyric(e) {
     e.preventDefault();
-    this.props
-      .mutate({
-        variables: {
-          id: this.props.params.id,
-          content: this.state.lyric
-        }
-      })
-      .then(() => this.setState({ lyric: "" }));
+    this.props.mutate({
+      variables: {
+        id: this.props.params.id,
+        content: this.state.lyric
+      },
+      refetchQueries: [
+        { query: fetchSongDetails, variables: { id: this.props.params.id } }
+      ]
+    });
+    this.setState({ lyric: "" });
   }
   render() {
     return (
       <form onSubmit={this.submitLyric}>
-        <label htmlFor="lyric"></label>
+        <label htmlFor="lyric">Add Lyric</label>
         <input
           type="text"
           onChange={e => this.setState({ lyric: e.target.value })}
