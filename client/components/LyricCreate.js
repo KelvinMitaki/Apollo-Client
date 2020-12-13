@@ -18,10 +18,7 @@ export class LyricCreate extends Component {
       variables: {
         id: this.props.params.id,
         content: this.state.lyric
-      },
-      refetchQueries: [
-        { query: fetchSongDetails, variables: { id: this.props.params.id } }
-      ]
+      }
     });
     this.setState({ lyric: "" });
   }
@@ -47,6 +44,7 @@ const mutation = gql`
       id
       title
       lyrics {
+        id
         content
       }
     }
