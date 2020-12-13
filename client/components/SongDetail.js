@@ -28,18 +28,31 @@ const SongDetail = ({ data, mutate }) => {
             style={{ position: "relative" }}
           >
             {lrc.content}
-            <i
-              className="material-icons"
+            <span
               style={{
                 position: "absolute",
-                right: "5px",
-                cursor: "pointer",
-                color: lrc.likes !== 0 ? "blue" : "black"
+                right: "10px"
               }}
-              onClick={() => likeLyric(lrc.id)}
             >
-              thumb_up
-            </i>
+              <i
+                className="material-icons"
+                style={{
+                  cursor: "pointer",
+                  color: lrc.likes !== 0 ? "blue" : "black"
+                }}
+                onClick={() => likeLyric(lrc.id)}
+              >
+                thumb_up
+              </i>
+              <span
+                style={{
+                  transform: "translate(5px,-5px)",
+                  display: "inline-block"
+                }}
+              >
+                {lrc.likes}
+              </span>
+            </span>
           </li>
         ))}
       </ul>
