@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "react-apollo";
 import { fetchSongDetails } from "../queries/fetchSongDetails";
 import { Link } from "react-router";
+import LyricCreate from "./LyricCreate";
 
 const SongDetail = ({ data }) => {
   if (!data.song) {
@@ -10,7 +11,8 @@ const SongDetail = ({ data }) => {
   return (
     <div className="container">
       <Link to="/">Back</Link>
-      <p>{data.song.title}</p>
+      <h3>{data.song.title}</h3>
+      <LyricCreate />
     </div>
   );
 };
